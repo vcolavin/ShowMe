@@ -1,0 +1,32 @@
+<!-- TODO: should allow someone to put in an address OR a geolocation. -->
+
+<h3>Fill out this form to find shows for an artist near you.</h3>
+<p>If you don't know your geolocation (which, yeah, why would you?), you can use <a href="http://latlong.net/">latlong.net</a>.</p>
+<p>It will search last.fm for events within a 100 km (~62 mile) radius of the coordinate provided.</p>
+<form action="/events" method="GET">
+  <input type="submit" value="~*~ submit ~*~">
+  <input type="text" name="artist" placeholder="ARTIST NAME" required>
+  <input type="number" step="any" name="latitude" placeholder="LATITUDE" max=90 min=-90 required>
+  <input type="number" step="any" name="longitude" placeholder="LONGITUDE" max=180 min=-180 required>
+</form>
+
+<br><br>
+
+<h3>Fill this one out to log in.</h3>
+
+<form action="/login" method="POST">
+  <input type="submit" value="~*~ login ~*~">
+  <input type="text" name="email" placeholder="email address" required>
+  <input type="password" name="password" placeholder="password" required>
+</form>
+
+<br><br>
+
+<h3>And fill this one out to create an account and get access to way more features eventually.</h3>
+
+<form action="/signup" method="POST">
+  <input type="submit" value="~*~ create account ~*~">
+  <input type="text" name="email" placeholder="email address" required>
+  <input type="password" name="password" placeholder="password" required>
+</form>
+

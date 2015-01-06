@@ -1,0 +1,24 @@
+<h1>UPCOMING EVENTS FOR <%=@artist_info['name'].upcase%> WITHIN A 100 KM RADIUS</h1>
+
+<%if @events_for_artist_in_radius%>
+  <ol>
+    <%@events_for_artist_in_radius.each do |event, index|%>
+      <li><%=event_to_s(event)%></li>
+    <%end%>
+  </ol>
+<%else%>
+  <p>This artist does not have any upcoming events in this area, at least according to last.fm, which is often incomplete.</p>
+<%end%>
+
+<ol>
+  <%@events_for_artist.each do |event|%>
+      <li><%=event_to_s(event)%></li>
+  <%end%>
+</ol>
+
+<ol>
+  <%@events_in_radius.each do |event|%>
+      <li><%=event_to_s(event)%></li>
+  <%end%>
+</ol>
+
