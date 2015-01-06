@@ -34,7 +34,7 @@ post '/signup' do
   user = User.new(email: params[:email])
   user.password = params[:password]
   if user.save
-    session[:user_id] = user.id
+    # session[:user_id] = user.id
   else
     flash[:errors] = user.errors
   end
@@ -43,6 +43,7 @@ end
 
 post '/login' do
   @user = User.find_by(email: params[:email])
+
   if @user && @user.authenticate(params[:password])
     session[:user_id] = @user.id
   else
