@@ -30,27 +30,27 @@ get '/events' do
   erb :events
 end
 
-post '/signup' do
-  user = User.new(email: params[:email], pw_hash: params[:password])
-  if user.save
-    session[:used_id] = user.id # FIXME: Why doesn't this log the user in?
-  else
-    flash[:errors] = user.errors
-  end
-  redirect to '/'
-end
+# post '/signup' do
+#   user = User.new(email: params[:email], pw_hash: params[:password])
+#   if user.save
+#     session[:used_id] = user.id # FIXME: Why doesn't this log the user in?
+#   else
+#     flash[:errors] = user.errors
+#   end
+#   redirect to '/'
+# end
 
-post '/login' do
-  @user = User.find_by(email: params[:email])
-  if @user && @user.authenticate(params[:password])
-    session[:user_id] = @user.id
-  else
-    flash[:errors] = ["invalid email or password"]
-  end
-  redirect '/'
-end
+# post '/login' do
+#   @user = User.find_by(email: params[:email])
+#   if @user && @user.authenticate(params[:password])
+#     session[:user_id] = @user.id
+#   else
+#     flash[:errors] = ["invalid email or password"]
+#   end
+#   redirect '/'
+# end
 
-get '/logout' do
-  session[:user_id] = nil
-  redirect to '/'
-end
+# get '/logout' do
+#   session[:user_id] = nil
+#   redirect to '/'
+# end
