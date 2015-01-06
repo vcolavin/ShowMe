@@ -31,9 +31,10 @@ get '/events' do
 end
 
 post '/signup' do
-  user = User.new(email: params[:email], pw_hash: params[:password])
+  user = User.new(email: params[:email])
+  user.password = params[:password]
   if user.save
-    session[:used_id] = user.id # FIXME: Why doesn't this log the user in?
+    session[:user_id] = user.id
   else
     flash[:errors] = user.errors
   end
