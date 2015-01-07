@@ -34,7 +34,7 @@ post '/signup' do
   user = User.new(email: params[:email])
   user.password = params[:password]
   if user.save
-    # session[:user_id] = user.id
+    session[:user_id] = user.id
   else
     flash[:errors] = user.errors
   end
