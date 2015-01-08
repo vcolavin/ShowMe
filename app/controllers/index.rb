@@ -6,26 +6,21 @@ end
 get '/events' do
   lastfm = Lastfm.new(ENV['LASTFM_KEY'], ENV['LASTFM_SECRET'])
 
-  @artist_info = lastfm.artist.get_info(
-    :artist => params[:artist]
-  )
+  @artist_name = params[:artist]
 
-  @events_for_artist = lastfm.artist.get_events(
+  events_for_artist = lastfm.artist.get_events(
     :artist => params[:artist],
-    :limit => 100
+    :limit  => 100
   )
 
-  @events_in_radius = lastfm.geo.get_events(
-      :lat => params[:latitude],
-      :long => params[:longitude],
-      :distance => 100,
-      :limit => 500 # FIXME: This is a great way to get kicked off the API
-    )
+  # Build a list of artists within radius
 
-  # compare @events_for_artist and @events_within_radius to get their intersection
-  if (@events_in_radius & @events_for_artist) != []
-    @events_for_artist_in_radius = @events_in_radius & @events_for_artist
-  end
+  @events_for_artist_in_radius = build_list_of_events(
+    events:           events_for_artist,
+    local_latitude:   params[:latitude].to_f,
+    local_longitude:  params[:longitude].to_f,
+    radius:           100
+  )
 
   erb :events
 end
@@ -34,7 +29,7 @@ post '/signup' do
   user = User.new(email: params[:email])
   user.password = params[:password]
   if user.save
-    # session[:user_id] = user.id
+    session[:user_id] = user.id
   else
     flash[:errors] = user.errors
   end

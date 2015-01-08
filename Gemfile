@@ -20,6 +20,7 @@ gem 'lastfm'
 gem 'json'
 gem 'bcrypt'
 gem 'rack-flash3'
+gem 'haversine', '~> 0.3.0'
 
 group :test do
   gem 'shoulda-matchers'
