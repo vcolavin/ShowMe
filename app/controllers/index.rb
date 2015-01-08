@@ -9,7 +9,7 @@ get '/events' do
   @artist_name = params[:artist]
 
   events_for_artist = lastfm.artist.get_events(
-    :artist => params[:artist],
+    :artist => @artist_name,
     :limit  => 100
   )
 

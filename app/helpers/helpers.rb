@@ -21,7 +21,7 @@ helpers do
 
     local_latitude  = options[:local_latitude]
     local_longitude = options[:local_longitude]
-    events          = options[:events]
+    events          = options[:events] || []
     radius          = options[:radius]
 
     events_for_artist_in_radius = events.map do |event|
@@ -41,7 +41,7 @@ helpers do
         if (distance_from_point < radius)
           event # adds the event to @events_for_artist_in_radius
         else
-          nil # TODO: Sometimes the venue is missing coordinates. In this case, we'll have to go to the Google API to find them from the address.
+          nil # TODO: Sometimes the venue is missing coordinates. In this case, go to the Google API to find them from the address.
         end
       end
     end

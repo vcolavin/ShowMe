@@ -1,6 +1,6 @@
 <h1>UPCOMING EVENTS FOR <%=@artist_name.upcase%> WITHIN A 100 KM RADIUS</h1>
 
-<%if @events_for_artist_in_radius != []%>
+<%if @events_for_artist_in_radius && @events_for_artist_in_radius != []%>
   <ol>
     <%@events_for_artist_in_radius.each do |event, index|%>
       <li><%=event_to_s(event)%></li>
