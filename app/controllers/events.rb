@@ -23,14 +23,14 @@ end
 
 
 get '/users/:user_id/events' do
-  @list_of_artists = User.find(params[:user_id]).artists
+  list_of_artists = User.find(params[:user_id]).artists
   local_latitude = params[:latitude].to_f
   local_longitude = params[:longitude].to_f
 
-  if @list_of_artists
+  if list_of_artists
   lastfm = Lastfm.new(LASTFM_KEY, LASTFM_SECRET)
 
-    all_shows = @list_of_artists.map do |artist|
+    all_shows = list_of_artists.map do |artist|
       lastfm.artist.get_events(
         :artist => artist.name,
         :limit  => 100
@@ -45,7 +45,6 @@ get '/users/:user_id/events' do
       radius:           100
     )
 
-    puts @all_events_in_radius
     erb :all_events
   end
 end
