@@ -25,11 +25,11 @@ helpers do
     lastfm = Lastfm.new(LASTFM_KEY, LASTFM_SECRET)
     events = []
 
+
     artists.each do |artist|
       events << lastfm.artist.get_events(
-      :artist   => @artist_name,
-      :limit    => 100
-    )
+      :artist   => artist,
+      :limit    => 100)
     end
 
     events.flatten
@@ -42,10 +42,11 @@ helpers do
     events          = options[:events] || []
     radius          = options[:radius]
 
-    events_for_artist_in_radius = events.map do |event|
+
+    events_for_artist_in_radius = events.flatten.map do |event|
 
       if (event['venue']['location']['point']['lat'] != {} &&
-          event['venue']['location']['point']['lat'] != {})
+          event['venue']['location']['point']['long'] != {})
 
         event_latitude  = event['venue']['location']['point']['lat'].to_f
         event_longitude = event['venue']['location']['point']['long'].to_f

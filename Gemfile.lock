@@ -15,6 +15,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    awesome_print (1.6.1)
     backports (3.6.0)
     bcrypt (3.1.9)
     builder (3.2.2)
@@ -92,6 +93,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord (~> 4.1)
   activesupport (~> 4.1)
+  awesome_print
   bcrypt
   capybara
   factory_girl

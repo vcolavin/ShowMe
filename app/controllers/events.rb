@@ -1,7 +1,21 @@
 get '/events' do
+  # lastfm = Lastfm.new(LASTFM_KEY, LASTFM_SECRET)
+
+  @artist_name = params[:artist]
+
+  # events_for_artist = lastfm.artist.get_events(
+  #   :artist => @artist_name,
+  #   :limit  => 100
+  # )
+
+  # events_for_artist =
+
+  # Build a list of artists within radius
+
+  # x = events_for_artists(params[:artist])
 
   @events_for_artist_in_radius = build_list_of_events(
-    events:           events_for_artist(@artist_name),
+    events:           events_for_artists(@artist_name),
     local_latitude:   params[:latitude].to_f,
     local_longitude:  params[:longitude].to_f,
     radius:           100
