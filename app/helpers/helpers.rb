@@ -19,17 +19,16 @@ helpers do
 
   def events_for_artists(artists = [])
 
-    # ensure that a single artist not passed
+    # ensures that everything is a one-dimensional array
     artists = [artists].flatten
 
     lastfm = Lastfm.new(LASTFM_KEY, LASTFM_SECRET)
     events = []
 
-
     artists.each do |artist|
       events << lastfm.artist.get_events(
-      :artist   => artist,
-      :limit    => 100)
+        :artist   => artist,
+        :limit    => 100)
     end
 
     events.flatten
@@ -58,9 +57,9 @@ helpers do
                                 event_longitude).to_km
 
         if (distance_from_point < radius)
-          event # adds the event to @events_for_artist_in_radius
+          event
         else
-          nil # TODO: Sometimes the venue is missing coordinates. In this case, go to the Google API to find them from the address.
+          nil # TODO: Sometimes the venue is missing coordinates, like if the event is in Australia. In this case, go to the Google API to find them from the address.
         end
       end
     end

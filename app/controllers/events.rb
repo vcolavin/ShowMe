@@ -1,18 +1,5 @@
 get '/events' do
-  # lastfm = Lastfm.new(LASTFM_KEY, LASTFM_SECRET)
-
   @artist_name = params[:artist]
-
-  # events_for_artist = lastfm.artist.get_events(
-  #   :artist => @artist_name,
-  #   :limit  => 100
-  # )
-
-  # events_for_artist =
-
-  # Build a list of artists within radius
-
-  # x = events_for_artists(params[:artist])
 
   @events_for_artist_in_radius = build_list_of_events(
     events:           events_for_artists(@artist_name),
@@ -27,23 +14,17 @@ end
 
 
 get '/users/:user_id/events' do
-  list_of_artists = User.find(params[:user_id]).artists
+
+  # FIXME: That's some ugly code right below me
+  # It's to get the artist names rather than the artist objects.
+  list_of_artists = User.find(params[:user_id]).artists.map {|artist| artist.name}
   local_latitude = params[:latitude].to_f
   local_longitude = params[:longitude].to_f
 
   if list_of_artists
-  lastfm = Lastfm.new(LASTFM_KEY, LASTFM_SECRET)
-
-    all_shows = list_of_artists.map do |artist|
-      lastfm.artist.get_events(
-        :artist => artist.name,
-        :limit  => 100
-      )
-    end
-    all_shows.flatten!
 
     @all_events_in_radius = build_list_of_events(
-      events:           all_shows,
+      events:           events_for_artists(list_of_artists),
       local_latitude:   local_latitude,
       local_longitude:  local_longitude,
       radius:           100
