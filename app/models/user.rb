@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   include BCrypt
 
-  has_many :user_artists
-  has_many :artists, through: :user_artists
+  has_many :followings
+  has_many :artists, through: :followings
 
   validates :email, {presence: true, uniqueness: true}
   validates :password_hash, presence: true

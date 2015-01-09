@@ -1,6 +1,6 @@
-class CreateUserArtists < ActiveRecord::Migration
+class CreateFollowings < ActiveRecord::Migration
   def change
-    create_table :user_artists do |t|
+    create_table :followings do |t|
       t.integer :user_id
       t.integer :artist_id
 
