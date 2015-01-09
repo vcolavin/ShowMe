@@ -17,6 +17,24 @@ helpers do
     !!current_user
   end
 
+  def events_for_artists(artists = [])
+
+    # ensure that a single artist not passed
+    artists = [artists].flatten
+
+    lastfm = Lastfm.new(LASTFM_KEY, LASTFM_SECRET)
+    events = []
+
+    artists.each do |artist|
+      events << lastfm.artist.get_events(
+      :artist   => @artist_name,
+      :limit    => 100
+    )
+    end
+
+    events.flatten
+  end
+
   def build_list_of_events(options = {})
 
     local_latitude  = options[:local_latitude]

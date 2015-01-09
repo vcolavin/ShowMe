@@ -17,6 +17,7 @@
     <%end%>
   <%end%>
 </ul>
+
 <p>Click here to find shows for these artists:<form action=<%="/users/#{@user.id}/events"%> method="get">
   <input type="hidden" id="latitude-field" type="number" step="any" name="latitude" placeholder="LATITUDE" max=90 min=-90 required>
   <input type="hidden" id="longitude-field" type="number" step="any" name="longitude" placeholder="LONGITUDE" max=180 min=-180 required>
