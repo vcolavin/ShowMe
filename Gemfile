@@ -21,6 +21,7 @@ gem 'json'
 gem 'bcrypt'
 gem 'rack-flash3'
 gem 'haversine', '~> 0.3.0'
+gem 'awesome_print'
 
 group :test do
   gem 'shoulda-matchers'
