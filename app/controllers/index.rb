@@ -1,10 +1,6 @@
 get '/' do
   @errors = flash[:errors] if flash[:errors]
-  if session[:user_id]
-    erb :logged_in_home
-  else
-    erb :logged_out_home
-  end
+  erb :splash
 end
 
 get '/events' do
@@ -30,6 +26,7 @@ get '/events' do
 end
 
 get '/signup' do
+  @errors = flash[:errors] if flash[:errors]
   erb :signup
 end
 
@@ -41,10 +38,11 @@ post '/signup' do
   else
     flash[:errors] = user.errors
   end
-  redirect to '/'
+  redirect "/users/#{@user.id}"
 end
 
 get '/login' do
+  @errors = flash[:errors] if flash[:errors]
   erb :login
 end
 
@@ -56,7 +54,7 @@ post '/login' do
   else
     flash[:errors] = ["invalid email or password"]
   end
-  redirect '/'
+  redirect "/users/#{@user.id}"
 end
 
 get '/logout' do
