@@ -1,5 +1,5 @@
 get '/events' do
-  lastfm = Lastfm.new(ENV['LASTFM_KEY'], ENV['LASTFM_SECRET'])
+  lastfm = Lastfm.new(LASTFM_KEY, LASTFM_SECRET)
 
   @artist_name = params[:artist]
 
@@ -28,7 +28,7 @@ get '/users/:user_id/events' do
   local_longitude = params[:longitude].to_f
 
   if @list_of_artists
-    lastfm = Lastfm.new(ENV['LASTFM_KEY'], ENV['LASTFM_SECRET'])
+  lastfm = Lastfm.new(LASTFM_KEY, LASTFM_SECRET)
 
     all_shows = @list_of_artists.map do |artist|
       lastfm.artist.get_events(
