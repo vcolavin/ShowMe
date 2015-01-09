@@ -25,4 +25,9 @@ $(document).ready(function() {
       $("#" + formData[0].value).remove()
     })
   })
+
+  navigator.geolocation.getCurrentPosition( function(position) {
+    $("#latitude-field").val(position.coords.latitude)
+    $("#longitude-field").val(position.coords.longitude)
+  });
 })
