@@ -25,6 +25,10 @@ get '/events' do
   erb :events
 end
 
+get '/signup' do
+  erb :signup
+end
+
 post '/signup' do
   user = User.new(email: params[:email])
   user.password = params[:password]
@@ -34,6 +38,10 @@ post '/signup' do
     flash[:errors] = user.errors
   end
   redirect to '/'
+end
+
+get '/login' do
+  erb :login
 end
 
 post '/login' do
