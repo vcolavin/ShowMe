@@ -1,3 +1,4 @@
 class Artists < ActiveRecord::Base
-  # Remember to create a migration!
+  has_many :user_artists
+  has_many :users, through: :user_artists
 end
