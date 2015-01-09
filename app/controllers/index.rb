@@ -1,6 +1,10 @@
 get '/' do
   @errors = flash[:errors] if flash[:errors]
-  erb :home
+  if session[:user_id]
+    erb :logged_in_home
+  else
+    erb :logged_out_home
+  end
 end
 
 get '/events' do
