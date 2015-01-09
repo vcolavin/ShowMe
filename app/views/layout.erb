@@ -20,7 +20,7 @@
 <body>
 
   <%if current_user%>
-    <p>You are logged in. Click <a href="/logout">here</a> to log out.</p>
+    <p>You are logged in. Click <a href="/logout">here</a> to log out or click <a href=<%="/users/#{session[:user_id]}"%>>here</a> to go to your profile.</p>
   <%else%>
     <p>You are not logged in. Click <a href="/login">here</a> to log in or <a href="/signup">here</a> to create an account</p>
   <%end%>

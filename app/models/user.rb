@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   include BCrypt
 
+  has_many :followings
+  has_many :artists, through: :followings
+
   validates :email, {presence: true, uniqueness: true}
   validates :password_hash, presence: true
   validates :email, format: {with: /\S+@{1}\S+[.]\D{2,}/, message: 'is not a valid email address'}
