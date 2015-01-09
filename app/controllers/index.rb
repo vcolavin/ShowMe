@@ -3,6 +3,11 @@ get '/' do
   erb :splash
 end
 
+get '/users/:user_id' do
+  @user = User.find(params[:user_id])
+  erb :logged_in_home
+end
+
 get '/events' do
   lastfm = Lastfm.new(ENV['LASTFM_KEY'], ENV['LASTFM_SECRET'])
 
@@ -35,10 +40,11 @@ post '/signup' do
   user.password = params[:password]
   if user.save
     session[:user_id] = user.id
+    redirect "/users/#{@user.id}"
   else
     flash[:errors] = user.errors
+    redirect '/signup'
   end
-  redirect "/users/#{@user.id}"
 end
 
 get '/login' do
@@ -51,10 +57,11 @@ post '/login' do
 
   if @user && @user.authenticate(params[:password])
     session[:user_id] = @user.id
+    redirect "/users/#{@user.id}"
   else
     flash[:errors] = ["invalid email or password"]
+    redirect to 'login'
   end
-  redirect "/users/#{@user.id}"
 end
 
 get '/logout' do
