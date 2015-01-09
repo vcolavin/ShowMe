@@ -6,14 +6,15 @@ $(document).ready(function() {
     $.ajax({
       type: "POST",
       url:  "/artists",
-      data: formData
+      data: formData,
+      dataType: "JSON"
     }).done(function(data) {
-      $(".artist-list").append("<li>" + data + "</li>")
+      $(".artist-list").append("<li id='" + data.id + "'" + ">" + data.name + "<form class='delete-artist-form'> <input type='hidden' name='artist_id' value='" + data.id + "'> <input type='submit' value='delete'> </form> </li>")
     })
   })
 
 
-  $('.delete-artist-form').submit(function(event) {
+  $('ul').on('submit', 'li .delete-artist-form', function(event) {
     event.preventDefault()
     var formData = $(this).serializeArray()
 
