@@ -1,8 +1,12 @@
 <p>Your tracked artists:</p>
-
-
-
-<form class="create-artist-form" action="/create_artist" method="POST">
+<ul class="artist-list">
+  <%if @user.artists%>
+    <%@user.artists.each do |artist|%>
+      <li><%=artist.name%></li>
+    <%end%>
+  <%end%>
+</ul>
+<form class="create-artist-form" action="/artists" method="POST">
   <input type="text" name="artist_name" placeholder="artist name" required>
   <input type="submit" value="add artist">
 </form>
