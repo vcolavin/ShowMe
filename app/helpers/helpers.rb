@@ -39,10 +39,10 @@ helpers do
     local_latitude  = options[:local_latitude]
     local_longitude = options[:local_longitude]
     events          = options[:events] || []
-    radius          = options[:radius]
+    search_radius   = options[:search_radius]
 
 
-    events_for_artist_in_radius = events.flatten.map do |event|
+    events_for_artist_in_search_radius = events.flatten.map do |event|
 
       if (event['venue']['location']['point']['lat'] != {} &&
           event['venue']['location']['point']['long'] != {})
@@ -50,13 +50,13 @@ helpers do
         event_latitude  = event['venue']['location']['point']['lat'].to_f
         event_longitude = event['venue']['location']['point']['long'].to_f
 
-        distance_from_point = Haversine.distance(
+        distance_to_event = Haversine.distance(
                                 local_latitude,
                                 local_longitude,
                                 event_latitude,
                                 event_longitude).to_km
 
-        if (distance_from_point < radius)
+        if (distance_to_event < search_radius)
           event
         else
           nil # TODO: Sometimes the venue is missing coordinates, like if the event is in Australia. In this case, go to the Google API to find them from the address.
@@ -64,7 +64,7 @@ helpers do
       end
     end
 
-  events_for_artist_in_radius.compact! # remove nils added in the map
+  events_for_artist_in_search_radius.compact # remove nils added in the map
   end
 
 end
